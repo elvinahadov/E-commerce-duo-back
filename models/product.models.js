@@ -6,20 +6,10 @@ const productSchema = mongoose.Schema({
     required: true,
     trim: true
   },
-  description: {
-    type: String,
-    required: true,
-    trim: true
-  },
   price: {
     type: Number,
     required: true,
     min: 0
-  },
-  cover: {
-    type: String,
-    required: true,
-    trim: true
   },
   rating: {
     type: Number,

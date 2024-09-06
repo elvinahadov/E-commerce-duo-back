@@ -1,4 +1,4 @@
-import { Product } from "../models/product.models";
+import { Product } from "../models/product.models.js";
 
 const getProducts = async (req, res) => {
   try {
@@ -24,12 +24,12 @@ const getSingleProduct = async (req, res) => {
 const deleteProduct = async (req, res) => {
   try {
     const { id } = req.params;
-    const deletedProduct = await Product.findByIdAndDelete(id);
+    const data = await Product.findByIdAndDelete(id);
 
-    if (!deletedProduct)
+    if (!data)
       return res.status(404).json({ message: "Product not found" });
 
-    res.status(200).json({ message: "Product deleted successfully" });
+    res.status(200).json({ message: "Product deleted successfully",data});
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -64,5 +64,5 @@ export {
   getSingleProduct,
   deleteProduct,
   editProduct,
-  addProduct,
+  addProduct
 };
