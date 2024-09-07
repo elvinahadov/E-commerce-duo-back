@@ -1,29 +1,33 @@
-import express from "express";
-import dotenv from "dotenv";
-import mongoose from "mongoose";
-import cookieParser from "cookie-parser";
-import userRoute from "./routes/user.route.js"
-const app = express();
+import mongoose from 'mongoose';
 
-dotenv.config();
-
-const PORT = process.env.PORT;
-const MONGODB_URL = process.env.MONGODB_URL;
-
-app.use(express.json());
-app.use(cookieParser());
-app.use(express.static("./"));
-app.use("/users",userRoute)
-
-app.listen(PORT, () => {
-  console.log(`Server listening on PORT:${PORT}`);
+const UserSchema = mongoose.Schema({
+    userName: {
+        type: String,
+        required: true,
+        unique: true,
+        trim: true
+    },
+    fullName: {
+        type: String,
+        required: true,
+        trim: true
+    },
+    password: {
+        type: String,
+        required: true
+    },
+    profilePic: {
+        type: String,
+        default: ''
+    },
+    email: {
+        type: String,
+        required: true,
+        unique: true,
+        trim: true,
+        lowercase: true        
+    }
+    
 });
 
-mongoose
-  .connect(MONGODB_URL)
-  .then(() => {
-    console.log("Database connection established.");
-  })
-  .catch((err) => {
-    console.log(err);
-  });
+export const User = mongoose.model("users", UserSchema);

@@ -1,29 +1,66 @@
-import express from "express";
-import dotenv from "dotenv";
-import mongoose from "mongoose";
-import cookieParser from "cookie-parser";
-import userRoute from "./routes/user.route.js"
-const app = express();
+import {User} from '../models/user.model.js'
 
-dotenv.config();
+export const addUser = async(request,response)=>{
+    const {userName, fullName, password, email} = request.body
 
-const PORT = process.env.PORT;
-const MONGODB_URL = process.env.MONGODB_URL;
+    if(!userName || !fullName || !password || !email){
+        response.status(500).send({message:"Please fill al required fields"})
+        return;
+    }
+     const existedUser = await User.findOne({email:email,userName:userName})
+    if(existedUser){
+    response.status(400).send({message:"User already exists"})
+        return;
+   }
+    const newUser = await User.create(request.body)
+    
+    if(!newUser){
+        response.status(500).send({message:"User not created"})
+        return;
+    }
+    response.status(201).send({message:"User created successfully",data:newUser})
+}
 
-app.use(express.json());
-app.use(cookieParser());
-app.use(express.static("./"));
-app.use("/users",userRoute)
+export const getAllUsers = async (request,response)=>{
+const users = await User.find()
+if(!users){
+    response.status(404).send({message:"No users found"})
+    return;
+}
+    response.status(200).send({message:"Users found",data:users})
+ 
+}
 
-app.listen(PORT, () => {
-  console.log(`Server listening on PORT:${PORT}`);
-});
+export const getSingleUser = async (request,response)=>{
+    const {userId} = request.params
+    const user = await User.findById(userId)
+        if(!user){
+            response.status(404).send({message:"User not found"})
+            return;
+        }
+    response.status(200).send({message:"User found",data:user})
 
-mongoose
-  .connect(MONGODB_URL)
-  .then(() => {
-    console.log("Database connection established.");
-  })
-  .catch((err) => {
-    console.log(err);
-  });
+}
+
+export const deleteUser = async(request,response)=>{
+    const {userId} =request.params
+    const user = await User.findByIdAndDelete(userId)
+    if(!user){
+        response.status(404).send({message:"User not found"})
+        return;
+    }
+    response.status(200).send({message:"User deleted successfully",data:user})
+}
+
+export const editUser = async(request,response)=>{
+    const {userId} = request.params
+    const updateUser = await User.findByIdAndUpdate({_id: userId})
+    if(!updateUser){
+        response.status(404).send({message:"User not found"})
+        return;
+    }
+    updateUser.set(request.body)
+    response.status(200).send({message:"User updated successfully",data:updateUser})
+  
+
+}
