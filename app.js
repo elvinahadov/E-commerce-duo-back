@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 import mongoose from "mongoose";
 import cookieParser from "cookie-parser";
 import productRouter from "./routes/product.route.js";
-
+import userRoute from "./routes/user.route.js"
 const app = express();
 
 dotenv.config();
@@ -16,6 +16,7 @@ app.use(cookieParser());
 app.use(express.static("./"));
 
 app.use('/api/products', productRouter)
+app.use("/users",userRoute)
 
 app.listen(PORT, () => {
   console.log(`Server listening on PORT:${PORT}`);
