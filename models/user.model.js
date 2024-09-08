@@ -27,7 +27,6 @@ const UserSchema = mongoose.Schema({
         trim: true,
         lowercase: true        
     }
-    
 });
 
-export const User = mongoose.model("users", UserSchema);
+export const User = mongoose.model("User", UserSchema);

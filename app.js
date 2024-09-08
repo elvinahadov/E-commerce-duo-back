@@ -4,8 +4,9 @@ import mongoose from "mongoose";
 import cookieParser from "cookie-parser";
 import productRouter from "./routes/product.route.js";
 import userRoute from "./routes/user.route.js"
+import cors from "cors"
 const app = express();
-
+app.use(cors());
 dotenv.config();
 
 const PORT = process.env.PORT;
@@ -30,3 +31,5 @@ mongoose
   .catch((err) => {
     console.log(err);
   });
+
+  

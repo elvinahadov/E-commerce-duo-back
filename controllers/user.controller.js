@@ -61,6 +61,4 @@ export const editUser = async(request,response)=>{
     }
     updateUser.set(request.body)
     response.status(200).send({message:"User updated successfully",data:updateUser})
-  
-
 }
