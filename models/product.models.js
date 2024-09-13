@@ -4,35 +4,51 @@ const productSchema = mongoose.Schema({
   name: {
     type: String,
     required: true,
-    trim: true
+    trim: true,
   },
   price: {
     type: Number,
     required: true,
-    min: 0
+    min: 0,
   },
   rating: {
     type: Number,
     min: 0,
     max: 5,
-    default: 0
+    default: 0,
   },
   discount: {
     type: Number,
     min: 0,
     max: 100,
-    default: 0
+    default: 0,
   },
   category: {
     type: String,
     required: true,
-    trim: true
+    trim: true,
   },
   quantity: {
     type: Number,
     required: true,
-    min: 0
+    min: 0,
+  },
+  productPic: {
+    type: String,
+    required: false,
+  },
+  hasDiscount:{
+    type : Boolean,
+    required:false
+  },
+  topSelling:{
+    type : Boolean,
+    required: false
+  },
+  newArrivals:{
+    type : Boolean,
+    required : false
   }
 });
 
-export const Product = mongoose.model('Product', productSchema);
+export const Product = mongoose.model("Product", productSchema);
