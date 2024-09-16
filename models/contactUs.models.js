@@ -12,4 +12,4 @@ const contactSchema = mongoose.Schema({
   },
 });
 
-export const ContactUs = mongoose.model("Product", productSchema);
+export const ContactUs = mongoose.model("ContactUs", contactSchema);
