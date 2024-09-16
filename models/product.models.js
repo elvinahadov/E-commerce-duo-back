@@ -37,18 +37,9 @@ const productSchema = mongoose.Schema({
     type: String,
     required: false,
   },
-  hasDiscount:{
-    type : Boolean,
-    required:false
-  },
-  topSelling:{
-    type : Boolean,
-    required: false
-  },
-  newArrivals:{
-    type : Boolean,
-    required : false
-  }
+  hasDiscount:Boolean,
+  topSelling: Boolean,
+  newArrivals:Boolean,
 });
 
 export const Product = mongoose.model("Product", productSchema);
