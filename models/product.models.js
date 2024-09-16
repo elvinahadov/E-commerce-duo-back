@@ -23,7 +23,7 @@ const productSchema = mongoose.Schema({
     max: 100,
     default: 0,
   },
-  category: {
+  categoryId: {
     type: String,
     required: true,
     trim: true,
