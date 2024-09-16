@@ -6,6 +6,7 @@ import productRouter from "./routes/product.route.js";
 import userRoute from "./routes/user.route.js";
 import newArrivalsRoute from "./routes/newArrivals.route.js";
 import topSellingRoute from "./routes/topSelling.route.js";
+import categoryRoute from "./routes/category.route.js"
 import cors from "cors";
 
 dotenv.config();
@@ -23,6 +24,8 @@ app.use("/api/products", productRouter);
 app.use("/api/newArrivals", newArrivalsRoute);
 app.use("/api/topSelling", topSellingRoute);
 app.use("/users", userRoute);
+app.use("/api/categories", categoryRoute);
+
 
 app.listen(PORT, () => {
   console.log(`Server listening on PORT:${PORT}`);
