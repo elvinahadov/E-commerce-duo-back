@@ -1,8 +1,8 @@
 import mongoose from "mongoose";
 
 const faqSchema = mongoose.Schema({
-  title: { type: Array },
-  description: { type: Array },
+  title: { type: String },
+  description: { type: String },
 });
 
 export const FAQ = mongoose.model("FAQ", faqSchema);

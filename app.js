@@ -8,6 +8,7 @@ import newArrivalsRoute from "./routes/newArrivals.route.js";
 import topSellingRoute from "./routes/topSelling.route.js";
 import categoryRoute from "./routes/category.route.js";
 import faqRoute from "./routes/faq.route.js";
+import commonRoute from "./routes/commonPages.route.js";
 
 import cors from "cors";
 
@@ -28,6 +29,7 @@ app.use("/api/topSelling", topSellingRoute);
 app.use("/users", userRoute);
 app.use("/api/categories", categoryRoute);
 app.use("/api/faq",faqRoute)
+app.use("/api/common",commonRoute)
 
 
 app.listen(PORT, () => {
